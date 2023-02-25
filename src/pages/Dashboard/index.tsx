@@ -16,11 +16,19 @@ const client = instantMeiliSearch(
 // })
 
 const Dashboard = () => {
+    const [index, setIndex] = React.useState("pdfs");
   return (
     <Box pt="100px" color="white" zIndex={2} pos="relative">
         <InstantSearch
-            indexName="pdfs"
+            indexName={index}
             searchClient={client}
+            onSearchStateChange={(e) => {
+                if(e.query==="") {
+                    setIndex("pdfs");
+                } else if(index !== "pdf_pages") {
+                    setIndex("pdf_pages");
+                }
+            }}
         >
             <SearchBox className='search-box' />
             <Flex gap="20px" direction="row">

@@ -1,16 +1,19 @@
 import { Box, Flex, Text, useCallbackRef } from '@chakra-ui/react'
+import axios from 'axios'
 import React, {useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import Loader from '../../components/Loader'
 
 const Upload = () => {
-    const onDrop = useCallbackRef(acceptedFiles => {
+    const onDrop = useCallbackRef(async (acceptedFiles) => {
         // Do something with the files
         setIsLoading(true)
         console.log(acceptedFiles)
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 2000)
+        const formData = new FormData()
+        formData.append("file", acceptedFiles[0])
+        const res = await axios.post("https://api.notewise.study/files", formData, {headers: { "Content-Type": "multipart/form-data" }})
+        console.log(res.data)
+        setIsLoading(false)
     }, [])
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
     const [isLoading, setIsLoading] = useState(false)

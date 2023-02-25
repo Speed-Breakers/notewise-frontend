@@ -17,6 +17,7 @@ import {
     useDisclosure,
     Image,
   } from '@chakra-ui/react';
+  import {Link as ReactRouterLink} from "react-router-dom"
   import {
     HamburgerIcon,
     CloseIcon,
@@ -114,8 +115,9 @@ export default function WithSubnavigation() {
             <Popover trigger={'hover'} placement={'bottom-start'}>
               <PopoverTrigger>
                 <Link
+                  as={ReactRouterLink}
                   p={2}
-                  href={navItem.href ?? '#'}
+                  to={navItem.href ?? '#'}
                   fontSize={'sm'}
                   fontWeight={500}
                   color={"white"}
@@ -257,10 +259,10 @@ export default function WithSubnavigation() {
     
     {
       label: 'Dashboard',
-      href: '#',
+      href: '/',
     },
     {
       label: 'Upload',
-      href: '#',
+      href: '/upload',
     },
   ];
