@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -19,7 +20,9 @@
     "pdfjs": "^2.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-instantsearch-dom": "^6.39.0",
+    "react-pdf": "^6.2.2",
     "react-router": "^6.8.1",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
@@ -51,6 +54,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-instantsearch-dom": "^6.12.3"
+    "@types/react-instantsearch-dom": "^6.12.3",
+    "@types/react-pdf": "^6.2.0"
   }
 }

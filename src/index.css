@@ -7,7 +7,45 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+.ais-Hits {
+  width: 100% !important;
+}
+.ais-Hits-list {
+  display: flex;
+  flex-wrap: wrap !important;
+  justify-content: center;
+  gap: 50px;
+  width: 90vw;
+  max-width: 1000px;
+  margin: auto;
+}
+ul li {
+  list-style: none !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.search-box input {
+  width: 400px;
+  /* height: 30px; */
+  padding: 10px;
+  border-radius: 10px;
+  background-color: black;
+  margin: auto;
+  font-size: 20px;
+  padding: 10px 20px;
+  outline: none;
+}
+.search-box input::placeholder {
+  color: #999;
+}
+
+.search-box form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
