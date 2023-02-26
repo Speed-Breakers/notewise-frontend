@@ -1,13 +1,14 @@
 import React from 'react'
 import { MeiliSearch } from 'meilisearch'
-import { InstantSearch, SearchBox, Hits, Highlight } from 'react-instantsearch-dom';
+import { InstantSearch, SearchBox, Hits, Pagination, Highlight } from 'react-instantsearch-dom';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import { Box, Flex } from '@chakra-ui/react';
-import Card from '../../components/Card';
+import TableRow from '../../components/TableRow';
+import Cards from '../../components/Cards';
 
 const client = instantMeiliSearch(
-    'https://ms-5871cafdda1c-2301.sgp.meilisearch.io',
-    'fd910a2c03bb59170385c0f71aafd1dc07dd0173a8373819dc77ee34bd6ff9d6'
+    'https://search.notewise.study/',
+    'dbb2b3e91c023a0f8943e6d5b57a9760971b932c3052a477799acd70c4465ef0'
 );
 
 // const client = new MeiliSearch({
@@ -32,18 +33,30 @@ const Dashboard = () => {
         >
             <SearchBox className='search-box' />
             <Flex gap="20px" direction="row">
-                <Hits hitComponent={Hit} />
+                {index === "pdfs" ?
+                    <Hits hitComponent={CardHit} />
+                    :
+                    <Hits hitComponent={TableHit} />
+                }
             </Flex>
+            {/* <Pagination /> */}
         </InstantSearch>
     </Box>
   )
 }
 
-const Hit = ({ hit }: any) => {
+const TableHit = ({ hit }: any) => {
     console.log(hit)
     return (
-        <Card fileName={hit.name} />
-        // <Highlight attribute="name" hit={hit} />
+        <TableRow file={hit} />
+        // <Highlight attribute="summary" hit={hit} />
+    )
+};
+const CardHit = ({ hit }: any) => {
+    console.log(hit)
+    return (
+        <Cards file={hit} />
+        // <Highlight attribute="summary" hit={hit} />
     )
 };
 
