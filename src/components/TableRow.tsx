@@ -9,16 +9,12 @@ interface CardProps {
 
 const TableRow = ({file} : CardProps) => {
   const navigate = useNavigate()
+  const routeHandler = (fileId:string, fileName:string) => {
+    const url = encodeURIComponent(`/${fileId}/${fileName}`);
+    navigate(`/file/${encodeURIComponent(fileId)}/${encodeURIComponent(fileName)}`)
+  }
   return (
-    // <Flex w="150px" direction="column" border="1px solid #666" bg="rgba(255,255,255,0.3)" backdropFilter="blur(20px)" borderRadius="10px"
-    //     boxShadow="-2px -2px 5px rgba(255,255,255,0.4), 2px 2px 5px rgba(0,0,0,1)" p="10px">
-    //     <Image src={pdfLogo} alt="pdf" />
-    //     <Box>
-    //         <Text textOverflow="ellipsis" w="100%" h="25px" mt="5px" whiteSpace="nowrap" overflow={"hidden"}>{fileName}</Text>
-    //         <Text>100 KB</Text>
-    //     </Box>
-    // </Flex>
-    <Flex justifyContent="space-between" alignItems="center" w="100%" bg="rgba(0,0,0,0.3)" p="10px" px="30px" borderBottom="1px solid black">
+    <Flex cursor="pointer" onClick={() => routeHandler(file.pdf_id, file.pdf_name)} mb="5px" justifyContent="space-between" alignItems="center" w="100%" bg="rgba(255,255,255,0.1)" p="10px" px="30px" borderBottom="1px solid black">
       <Image src={pdfLogo} w="40px" />
       <Text ml="10px" w="calc(100% - 300px)" fontSize={20}>{file.name || file.pdf_name}</Text>
       <Text ml="10px" w="100px">{file.summary ? file.summary.length <= 20 ? file.summary : `${file.summary.slice(0, 30)}...` : ''}</Text>

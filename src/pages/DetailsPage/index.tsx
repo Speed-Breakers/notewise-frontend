@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Text, useToast } from '@chakra-ui/react'
+import { Box, Button, Flex, Input, Text, useToast, Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Textarea,
+       } from '@chakra-ui/react'
 // import { Document, Page, pdfjs } from 'react-pdf'
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import React, {useState, useEffect} from 'react'
@@ -11,6 +19,8 @@ const DetailsPage = () => {
     const [pageNumber, setPageNumber] = useState(0)
     const [isNextDisabled, setIsNextDisabled] = useState(false)
     const [isPrevDisabled, setIsPrevDisabled] = useState(false)
+    const [isNoteModalOpen, setIsNoteModalOpen] = useState(false)
+    const [noteText, setNoteText] = useState("")
     const {fileId, title} = useParams()
     const toast = useToast()
 
@@ -38,17 +48,19 @@ const DetailsPage = () => {
         }
     }
 
+    console.log(noteText)
+
     return (
         <>
             {isLoading &&
                 <Loader />
             }
-            <Flex pt="100px" color="white" zIndex={2} pos="relative" w="calc(100vw - 50px)" maxW="1000px" margin="auto">
+            <Flex pt="100px" color="white" zIndex={2} pos="relative" w="calc(100vw - 50px)" maxW="1100px" margin="auto"justifyContent="space-between">
                 <Flex direction="column" >
                     {!isLoading &&
                         <Flex justifyContent="space-between" alignItems={"center"} mt="20px" mb="20px">
                             <Button color="black" onClick={() => goPrevPage()}>Prev</Button>
-                            <Text>Page {pageNumber+1}/{totalPages}</Text>
+                            <Flex alignItems="center"><Text mr="10px">Page</Text> <Input value={pageNumber+1} p="5px" w="35px" /> / {totalPages}</Flex>
                             <Button color="black" onClick={() => goNextPage()}>Next</Button>
                         </Flex>
                     }
@@ -61,12 +73,31 @@ const DetailsPage = () => {
                     {!isLoading &&
                         <Flex justifyContent="space-between" alignItems={"center"} mt="20px" mb="50px">
                             <Button color="black">Prev</Button>
-                            <Text>Page {pageNumber+1}/{totalPages}</Text>
+                            <Flex alignItems="center"><Text mr="10px">Page</Text> <Input value={pageNumber+1} p="5px" w="35px" /> / {totalPages}</Flex>
                             <Button color="black">Next</Button>
                         </Flex>
                     }
                 </Flex>
-                <Box w="200px"></Box>
+                <Box w="200px" mt="20px">
+                    <Modal isOpen={isNoteModalOpen} onClose={() => setIsNoteModalOpen(false)}>
+                        <ModalOverlay />
+                        <ModalContent>
+                        <ModalHeader>Modal Title</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Text>Add Description :</Text>
+                            <Textarea onChange={(e) => setNoteText(e.target.value)} />
+                        </ModalBody>
+
+                        <ModalFooter>
+                            <Button colorScheme='blue' mr={3} onClick={() => setIsNoteModalOpen(false)}>
+                            Close
+                            </Button>
+                        </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                    <Button color="black" onClick={() => setIsNoteModalOpen(true)}>Add new note</Button>
+                </Box>
             </Flex>
         </>
     )

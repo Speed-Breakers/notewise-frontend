@@ -32,7 +32,7 @@ const Dashboard = () => {
             }}
         >
             <SearchBox className='search-box' />
-            <Flex gap="20px" direction="row">
+            <Flex gap="20px" direction="row" mt="50px" className={index === "pdfs" ? "pdfs-list" : "pdf-pages-list"}>
                 {index === "pdfs" ?
                     <Hits hitComponent={CardHit} />
                     :
