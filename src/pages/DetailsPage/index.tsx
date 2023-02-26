@@ -48,7 +48,7 @@ const DetailsPage = () => {
         }
     }
 
-    console.log(noteText)
+    console.log(`https://notewise.sgp1.digitaloceanspaces.com/notewise/${fileId}/${title}`)
 
     return (
         <>
@@ -66,7 +66,7 @@ const DetailsPage = () => {
                     }
                     <Document
                         // file={{ url: 'https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK' }}
-                        file={{ url: `https://notewise.sgp1.digitaloceanspaces.com/${fileId}/${title}` }}
+                        file={{ url: `https://notewise.sgp1.digitaloceanspaces.com/notewise/${fileId}/${title}` }}
                         onLoadSuccess={onDocumentLoadSuccess}
                         >
                         <Page pageNumber={2} />
