@@ -65,7 +65,8 @@ const DetailsPage = () => {
                         </Flex>
                     }
                     <Document
-                        file={{ url: 'https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK' }}
+                        // file={{ url: 'https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK' }}
+                        file={{ url: `https://notewise.sgp1.digitaloceanspaces.com/${fileId}/${title}` }}
                         onLoadSuccess={onDocumentLoadSuccess}
                         >
                         <Page pageNumber={2} />

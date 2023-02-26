@@ -1,17 +1,32 @@
-import { Box, Flex, Text, useCallbackRef } from '@chakra-ui/react'
+import { Box, Flex, Text, useCallbackRef, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, {useState} from 'react'
 import {useDropzone} from 'react-dropzone'
+import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader'
 
 const Upload = () => {
+    const toast = useToast()
+    const navigate = useNavigate()
+
     const onDrop = useCallbackRef(async (acceptedFiles) => {
         // Do something with the files
         setIsLoading(true)
         console.log(acceptedFiles)
         const formData = new FormData()
         formData.append("file", acceptedFiles[0])
+        const resGet = await axios.get("https://api.notewise.study/")
+        console.log("getttttt", resGet)
         const res = await axios.post("https://api.notewise.study/files", formData, {headers: { "Content-Type": "multipart/form-data" }})
+        if (res) {
+            toast({
+                title: `File successfully uploaded`,
+                status: "success",
+                isClosable: true,
+            })
+            setIsLoading(false)
+            navigate("/")
+        }
         console.log(res.data)
         setIsLoading(false)
     }, [])

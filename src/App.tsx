@@ -8,6 +8,7 @@ import { Box } from '@chakra-ui/react';
 import Navbar from './components/Navbar';
 import Upload from './pages/Upload';
 import DetailsPage from './pages/DetailsPage';
+import axios from 'axios';
 
 function App() {
   return (
