@@ -25,7 +25,8 @@ const TableRow = ({file, query} : CardProps) => {
   const getContextText = () => {
     console.log(query)
     console.log(file.summary.indexOf(query), file.summary.substr(248, 40))
-    setResultContent(file.summary?.substr(file.summary.indexOf(query), 200))
+    if (file.summary.indexOf(query) !== -1)
+      setResultContent(file.summary?.substr(file.summary.indexOf(query), file.summary.length - file.summary.indexOf(query)))
   }
 
   return (
