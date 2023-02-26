@@ -36,7 +36,7 @@ export default function WithSubnavigation() {
           color={"white"}
           minH={'60px'}
           py={3}
-          px={"100px"}
+          px={{base: "20px", md:"100px"}}
           borderBottom={1}
           borderStyle={'solid'}
           borderColor={"black"}
@@ -202,7 +202,7 @@ export default function WithSubnavigation() {
             align={'start'}>
             {children &&
               children.map((child) => (
-                <Link as={ReactRouterLink} key={child.label} py={2} to={child.href}>
+                <Link as={ReactRouterLink} key={child.label} py={2} to={child.href || "/"}>
                   {child.label}
                 </Link>
               ))}

@@ -46,6 +46,7 @@ const Dashboard = () => {
             indexName={index}
             searchClient={client}
             onSearchStateChange={(e) => {
+                setQuery(e.query)
                 if(e.query==="") {
                     setIndex("pdfs");
                 } else if(index !== "pdf_pages") {
