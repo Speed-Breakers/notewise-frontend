@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { MeiliSearch } from 'meilisearch'
 import { InstantSearch, SearchBox, Hits, Pagination, Highlight } from 'react-instantsearch-dom';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+   } from '@chakra-ui/react';
 import TableRow from '../../components/TableRow';
 import Cards from '../../components/Cards';
 
@@ -18,6 +23,23 @@ const client = instantMeiliSearch(
 
 const Dashboard = () => {
     const [index, setIndex] = React.useState("pdfs");
+    const [query, setQuery] = useState("");
+
+    const TableHit = ({ hit }: any) => {
+        console.log(hit)
+        return (
+            <TableRow file={hit} query={query} />
+            // <Highlight attribute="summary" hit={hit} />
+        )
+    };
+    const CardHit = ({ hit }: any) => {
+        console.log(hit)
+        return (
+            <Cards file={hit} query={query} />
+            // <Highlight attribute="summary" hit={hit} />
+        )
+    };
+
   return (
     <Box pt="100px" color="white" zIndex={2} pos="relative">
         <InstantSearch
@@ -45,19 +67,6 @@ const Dashboard = () => {
   )
 }
 
-const TableHit = ({ hit }: any) => {
-    console.log(hit)
-    return (
-        <TableRow file={hit} />
-        // <Highlight attribute="summary" hit={hit} />
-    )
-};
-const CardHit = ({ hit }: any) => {
-    console.log(hit)
-    return (
-        <Cards file={hit} />
-        // <Highlight attribute="summary" hit={hit} />
-    )
-};
+
 
 export default Dashboard

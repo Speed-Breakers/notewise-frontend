@@ -15,7 +15,7 @@ html, body {
 }
 .ais-Hits-list {
   width: 90vw;
-  max-width: 700px; 
+  max-width: 800px; 
   margin: auto;
 }
 .pdfs-list .ais-Hits-list {
@@ -52,9 +52,9 @@ code {
   justify-content: center;
   margin-bottom: 40px;
 }
-.react-pdf__Page__textContent.textLayer {
+/* .react-pdf__Page__textContent.textLayer {
   display: none;
 }
 .react-pdf__Page__annotations.annotationLayer {
   display: none;
-}
+} */

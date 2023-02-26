@@ -3,11 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import pdfLogo from "../assets/pdfLogo.png"
 
-interface CardsProps {
-    fileId: string,
-    fileName: string
-}
-const Cards = ({file} : any) => {
+const Cards = ({file, query} : any) => {
     const navigate = useNavigate()
     const routeHandler = (fileId:string, fileName:string) => {
         const url = encodeURIComponent(`/${fileId}/${fileName}`);

@@ -9,15 +9,23 @@ const Upload = () => {
     const toast = useToast()
     const navigate = useNavigate()
 
-    const onDrop = useCallbackRef(async (acceptedFiles) => {
+    const onDrop = useCallbackRef(async (acceptedFiles:any) => {
         // Do something with the files
         setIsLoading(true)
         console.log(acceptedFiles)
         const formData = new FormData()
         formData.append("file", acceptedFiles[0])
-        const resGet = await axios.get("https://api.notewise.study/")
-        console.log("getttttt", resGet)
-        const res = await axios.post("https://api.notewise.study/files", formData, {headers: { "Content-Type": "multipart/form-data" }})
+        // const res = await axios.post("https://api.notewise.study/files", formData, {headers: { "Content-Type": "multipart/form-data" }})
+        // const res = await axios({
+            
+        //     url:"https://api.notewise.study/files", formData, {headers: { "Content-Type": "multipart/form-data" }}}
+        //     )
+        const res = await axios({
+            method: "POST",
+            url: "https://api.notewise.study/files",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" }
+        })
         if (res) {
             toast({
                 title: `File successfully uploaded`,

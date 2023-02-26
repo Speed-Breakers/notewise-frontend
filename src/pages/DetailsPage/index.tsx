@@ -33,7 +33,8 @@ const DetailsPage = () => {
 
     const goNextPage = () => {
         if (pageNumber < totalPages) {
-            setPageNumber(prev => prev+1)
+            setIsLoading(true)
+            setPageNumber((prev:any) => prev+1)
         }   else {
             setIsNextDisabled(true)
         }
@@ -42,11 +43,17 @@ const DetailsPage = () => {
     const goPrevPage = () => {
         if (pageNumber > 0) {
             setIsLoading(true)
-            setPageNumber(prev => prev-1)
+            setPageNumber((prev:any) => prev-1)
         }   else {
             setIsPrevDisabled(true)
         }
     }
+
+    useEffect(() => {
+        // const url = `https://cdn.jsdelivr.net/npm/pdfjs-dist@5.2.0/build/pdf.worker.min.js`
+        // pdfjs.GlobalWorkerOptions.workerSrc = url
+
+    }, )
 
     console.log(`https://notewise.sgp1.digitaloceanspaces.com/notewise/${fileId}/${title}`)
 
@@ -60,21 +67,21 @@ const DetailsPage = () => {
                     {!isLoading &&
                         <Flex justifyContent="space-between" alignItems={"center"} mt="20px" mb="20px">
                             <Button color="black" onClick={() => goPrevPage()}>Prev</Button>
-                            <Flex alignItems="center"><Text mr="10px">Page</Text> <Input value={pageNumber+1} p="5px" w="35px" /> / {totalPages}</Flex>
+                            <Flex alignItems="center"><Text mr="10px">Page</Text> <Input value={pageNumber} onChange={(e:any) => setPageNumber(parseInt(e.target.value))} p="5px" w="35px" /> / {totalPages}</Flex>
                             <Button color="black" onClick={() => goNextPage()}>Next</Button>
                         </Flex>
                     }
                     <Document
-                        // file={{ url: 'https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK' }}
-                        file={{ url: `https://notewise.sgp1.digitaloceanspaces.com/notewise/${fileId}/${title}` }}
+                        file={{ url: 'https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK' }}
+                        // file={{ url: `https://notewise.sgp1.digitaloceanspaces.com/notewise/${fileId}/${title}` }}
                         onLoadSuccess={onDocumentLoadSuccess}
                         >
-                        <Page pageNumber={2} />
+                        <Page pageNumber={pageNumber-1} />
                     </Document>
                     {!isLoading &&
                         <Flex justifyContent="space-between" alignItems={"center"} mt="20px" mb="50px">
                             <Button color="black">Prev</Button>
-                            <Flex alignItems="center"><Text mr="10px">Page</Text> <Input value={pageNumber+1} p="5px" w="35px" /> / {totalPages}</Flex>
+                            <Flex alignItems="center"><Text mr="10px">Page</Text> <Input value={pageNumber} onChange={(e:any) => setPageNumber(parseInt(e.target.value))} p="5px" w="35px" /> / {totalPages}</Flex>
                             <Button color="black">Next</Button>
                         </Flex>
                     }
@@ -92,7 +99,7 @@ const DetailsPage = () => {
 
                         <ModalFooter>
                             <Button colorScheme='blue' mr={3} onClick={() => setIsNoteModalOpen(false)}>
-                            Close
+                            Save
                             </Button>
                         </ModalFooter>
                         </ModalContent>
