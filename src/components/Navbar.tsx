@@ -202,7 +202,7 @@ export default function WithSubnavigation() {
             align={'start'}>
             {children &&
               children.map((child) => (
-                <Link key={child.label} py={2} href={child.href}>
+                <Link as={ReactRouterLink} key={child.label} py={2} to={child.href}>
                   {child.label}
                 </Link>
               ))}
